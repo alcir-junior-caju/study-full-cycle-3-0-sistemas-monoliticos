@@ -27,7 +27,13 @@ describe('Integration test client admin facade', () => {
       id: '1',
       name: 'John Doe',
       email: 'johndoe@test.com',
-      address: '123 Main St',
+      document: '123456789',
+      street: 'Street',
+      number: '123',
+      complement: 'Complement',
+      city: 'City',
+      state: 'State',
+      zipCode: '12345678',
     };
 
     await clientFacade.add(input);
@@ -38,7 +44,13 @@ describe('Integration test client admin facade', () => {
     expect(client.id).toBe(input.id);
     expect(client.name).toBe(input.name);
     expect(client.email).toBe(input.email);
-    expect(client.address).toBe(input.address);
+    expect(client.document).toBe(input.document);
+    expect(client.street).toBe(input.street);
+    expect(client.number).toBe(input.number);
+    expect(client.complement).toBe(input.complement);
+    expect(client.city).toBe(input.city);
+    expect(client.state).toBe(input.state);
+    expect(client.zipCode).toBe(input.zipCode);
   });
 
   it('should find a client', async () => {
@@ -48,7 +60,13 @@ describe('Integration test client admin facade', () => {
       id: '1',
       name: 'John Doe',
       email: 'johndoe@test.com',
-      address: '123 Main St',
+      document: '123456789',
+      street: 'Street',
+      number: '123',
+      complement: 'Complement',
+      city: 'City',
+      state: 'State',
+      zipCode: '12345678',
     };
 
     await clientFacade.add(input);
@@ -59,6 +77,12 @@ describe('Integration test client admin facade', () => {
     expect(client.id).toBe(input.id);
     expect(client.name).toBe(input.name);
     expect(client.email).toBe(input.email);
-    expect(client.address).toBe(input.address);
+    expect(client.document).toBe(input.document);
+    expect(client.street).toBe(input.street);
+    expect(client.number).toBe(input.number);
+    expect(client.complement).toBe(input.complement);
+    expect(client.city).toBe(input.city);
+    expect(client.state).toBe(input.state);
+    expect(client.zipCode).toBe(input.zipCode);
   });
 });

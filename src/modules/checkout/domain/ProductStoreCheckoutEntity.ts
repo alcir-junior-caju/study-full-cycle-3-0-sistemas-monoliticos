@@ -1,13 +1,13 @@
 import { AggregateRootInterface, BaseEntity, Id } from "../../@shared";
 
 type Input = {
-  id: Id;
+  id?: Id;
   name: string;
   description: string;
   salesPrice: number;
 };
 
-export class ProductStoreCatalogEntity extends BaseEntity implements AggregateRootInterface {
+export class ProductStoreCheckoutEntity extends BaseEntity implements AggregateRootInterface {
   private _name: string;
   private _description: string;
   private _salesPrice: number;

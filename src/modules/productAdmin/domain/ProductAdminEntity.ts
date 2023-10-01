@@ -14,12 +14,12 @@ export class ProductAdminEntity extends BaseEntity implements AggregateRootInter
   private _purchasePrice: number;
   private _stock: number;
 
-  constructor(input: Input) {
-    super(input.id);
-    this._name = input.name;
-    this._description = input.description;
-    this._purchasePrice = input.purchasePrice;
-    this._stock = input.stock;
+  constructor({ id, name, description, purchasePrice, stock}: Input) {
+    super(id);
+    this._name = name;
+    this._description = description;
+    this._purchasePrice = purchasePrice;
+    this._stock = stock;
   }
 
   get name(): string {

@@ -1,10 +1,11 @@
-import { AggregateRootInterface, BaseEntity, Id } from "../../@shared";
+import { Address, AggregateRootInterface, BaseEntity, Id } from "../../@shared";
 
 type Input = {
   id?: Id;
   name: string;
   email: string;
-  address: string;
+  document: string;
+  address: Address;
   createdAt?: Date;
   updatedAt?: Date;
 };
@@ -12,12 +13,14 @@ type Input = {
 export class ClientAdminEntity extends BaseEntity implements AggregateRootInterface {
   private _name: string;
   private _email: string;
-  private _address: string;
+  private _document: string;
+  private _address: Address;
 
-  constructor({ id, name, email, address, createdAt, updatedAt }: Input) {
+  constructor({ id, name, email, document, address, createdAt, updatedAt }: Input) {
     super(id, createdAt, updatedAt);
     this._name = name;
     this._email = email;
+    this._document = document;
     this._address = address;
   }
 
@@ -29,7 +32,11 @@ export class ClientAdminEntity extends BaseEntity implements AggregateRootInterf
     return this._email;
   }
 
-  get address(): string {
+  get document(): string {
+    return this._document;
+  }
+
+  get address(): Address {
     return this._address;
   }
 }

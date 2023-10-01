@@ -16,14 +16,14 @@ export class InvoiceFacade implements InvoiceFacadeInterface {
     this._generateUseCase = generateUseCase;
   }
 
-  find(input: InputFindInvoiceFacadeDto): Promise<OutputFindInvoiceFacadeDto> {
+  async find(input: InputFindInvoiceFacadeDto): Promise<OutputFindInvoiceFacadeDto> {
     const inputFacade = {
       id: input.id,
     };
 
-    return this._findUseCase.execute(inputFacade);
+    return await this._findUseCase.execute(inputFacade);
   }
-  generate(input: InputGenerateInvoiceFacadeDto): Promise<OutputGenerateInvoiceFacadeDto> {
+  async generate(input: InputGenerateInvoiceFacadeDto): Promise<OutputGenerateInvoiceFacadeDto> {
     const inputFacade = {
       id: input.id,
       name: input.name,
@@ -37,6 +37,6 @@ export class InvoiceFacade implements InvoiceFacadeInterface {
       items: input.items,
     };
 
-    return this._generateUseCase.execute(inputFacade);
+    return await this._generateUseCase.execute(inputFacade);
   }
 }

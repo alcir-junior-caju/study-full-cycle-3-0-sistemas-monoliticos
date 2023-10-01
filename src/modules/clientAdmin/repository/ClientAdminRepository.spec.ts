@@ -2,13 +2,21 @@ import { Sequelize } from "sequelize-typescript";
 import { ClientAdminModel } from "./ClientAdminModel";
 import { ClientAdminRepository } from "./ClientAdminRepository";
 import { ClientAdminEntity } from "../domain";
-import { Id } from "../../@shared";
+import { Address, Id } from "../../@shared";
 
 const client = {
-  id: '1',
+  id: new Id('1'),
   name: 'John Doe',
   email: 'johndoe@test.com',
-  address: '123 Main St',
+  document: '123456789',
+  address: new Address({
+    street: 'Street',
+    number: '123',
+    complement: 'Complement',
+    city: 'City',
+    state: 'State',
+    zipCode: '12345678',
+  }),
   createdAt: new Date(),
   updatedAt: new Date(),
 };
@@ -33,15 +41,22 @@ describe('Integration test client admin repository', () => {
   });
 
   it('should find a client', async () => {
-    await ClientAdminModel.create(client);
+    const clientEntity = new ClientAdminEntity(client);
 
     const clientRepository = new ClientAdminRepository();
-    const output = await clientRepository.find(client.id);
+    await clientRepository.add(clientEntity);
+    const output = await clientRepository.find(client.id.id);
 
-    expect(output.id.id).toBe(client.id);
+    expect(output.id.id).toBe(client.id.id);
     expect(output.name).toBe(client.name);
     expect(output.email).toBe(client.email);
-    expect(output.address).toBe(client.address);
+    expect(output.document).toBe(client.document);
+    expect(output.address.street).toBe(client.address.street);
+    expect(output.address.number).toBe(client.address.number);
+    expect(output.address.complement).toBe(client.address.complement);
+    expect(output.address.city).toBe(client.address.city);
+    expect(output.address.state).toBe(client.address.state);
+    expect(output.address.zipCode).toBe(client.address.zipCode);
     expect(output.createdAt).toStrictEqual(client.createdAt);
     expect(output.updatedAt).toStrictEqual(client.updatedAt);
   });
@@ -51,7 +66,15 @@ describe('Integration test client admin repository', () => {
       id: new Id('1'),
       name: 'John Doe',
       email: 'johndoe@test.com',
-      address: '123 Main St',
+      document: '123456789',
+      address: new Address({
+        street: 'Street',
+        number: '123',
+        complement: 'Complement',
+        city: 'City',
+        state: 'State',
+        zipCode: '12345678',
+      }),
       createdAt: new Date(),
       updatedAt: new Date(),
     });
@@ -65,7 +88,13 @@ describe('Integration test client admin repository', () => {
     expect(clientDb.id).toBe(client.id.id);
     expect(clientDb.name).toBe(client.name);
     expect(clientDb.email).toBe(client.email);
-    expect(clientDb.address).toBe(client.address);
+    expect(clientDb.document).toBe(client.document);
+    expect(clientDb.street).toBe(client.address.street);
+    expect(clientDb.number).toBe(client.address.number);
+    expect(clientDb.complement).toBe(client.address.complement);
+    expect(clientDb.city).toBe(client.address.city);
+    expect(clientDb.state).toBe(client.address.state);
+    expect(clientDb.zipCode).toBe(client.address.zipCode);
     expect(clientDb.createdAt).toStrictEqual(client.createdAt);
     expect(clientDb.updatedAt).toStrictEqual(client.updatedAt);
   });

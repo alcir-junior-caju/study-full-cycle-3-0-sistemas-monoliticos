@@ -21,7 +21,13 @@ export class ClientAdminFacade implements ClientAdminFacadeInterface {
       id: input.id,
       name: input.name,
       email: input.email,
-      address: input.address,
+      document: input.document,
+      street: input.street,
+      number: input.number,
+      complement: input.complement,
+      city: input.city,
+      state: input.state,
+      zipCode: input.zipCode,
     };
 
     return this._addUseCase.execute(inputFacade);

@@ -13,7 +13,13 @@ describe('Unit test add client use case', () => {
     const input = {
       name: 'John Doe',
       email: 'johndoe@test.com',
-      address: 'Street 1'
+      document: '123456789',
+      street: 'Street',
+      number: '123',
+      complement: 'Complement',
+      city: 'City',
+      state: 'State',
+      zipCode: '12345678',
     }
 
     const output = await addClientUseCase.execute(input);
@@ -22,6 +28,12 @@ describe('Unit test add client use case', () => {
     expect(output.id).toBeDefined();
     expect(output.name).toBe(input.name);
     expect(output.email).toBe(input.email);
-    expect(output.address).toBe(input.address);
+    expect(output.document).toBe(input.document);
+    expect(output.street).toBe(input.street);
+    expect(output.number).toBe(input.number);
+    expect(output.complement).toBe(input.complement);
+    expect(output.city).toBe(input.city);
+    expect(output.state).toBe(input.state);
+    expect(output.zipCode).toBe(input.zipCode);
   });
 });

@@ -1,4 +1,4 @@
-import { Id } from "../../@shared";
+import { Address, Id } from "../../@shared";
 import { ClientAdminEntity } from "../domain";
 import { ClientAdminGatewayInterface } from "../gateway";
 import { ClientAdminModel } from "./ClientAdminModel";
@@ -9,7 +9,13 @@ export class ClientAdminRepository implements ClientAdminGatewayInterface {
       id: client.id.id,
       name: client.name,
       email: client.email,
-      address: client.address,
+      document: client.document,
+      street: client.address.street,
+      number: client.address.number,
+      complement: client.address.complement,
+      city: client.address.city,
+      state: client.address.state,
+      zipCode: client.address.zipCode,
       createdAt: client.createdAt,
       updatedAt: client.updatedAt,
     });
@@ -26,7 +32,15 @@ export class ClientAdminRepository implements ClientAdminGatewayInterface {
       id: new Id(client.id),
       name: client.name,
       email: client.email,
-      address: client.address,
+      document: client.document,
+      address: new Address({
+        street: client.street,
+        number: client.number,
+        complement: client.complement,
+        city: client.city,
+        state: client.state,
+        zipCode: client.zipCode,
+      }),
       createdAt: client.createdAt,
       updatedAt: client.updatedAt,
     });
