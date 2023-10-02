@@ -1,16 +1,15 @@
 import express, { Express } from 'express';
-import { productRouter } from './product';
 import { Sequelize } from 'sequelize-typescript';
 import { Umzug } from 'umzug';
-import { ProductAdminModel } from '../modules/productAdmin/repository';
 import request from 'supertest';
 import { migrator } from '../test-migrations/config-migrations/migrator';
-import { ProductStoreCatalogModel } from '../modules';
+import { ClientAdminModel } from '../modules';
+import { clientRouter } from './clients';
 
-describe('Integration test product api', () => {
+describe('Integration test Client api', () => {
   const app: Express = express();
   app.use(express.json());
-  app.use('/product', productRouter);
+  app.use('/client', clientRouter);
 
   let sequelize: Sequelize;
   let migration: Umzug<any>;
@@ -22,7 +21,7 @@ describe('Integration test product api', () => {
       logging: true,
       sync: { force: true },
     });
-    sequelize.addModels([ProductAdminModel, ProductStoreCatalogModel]);
+    sequelize.addModels([ClientAdminModel]);
     migration = migrator(sequelize);
     await migration.up();
   });
@@ -34,17 +33,19 @@ describe('Integration test product api', () => {
     await migration.down();
     await sequelize.close();
   });
-  it('should create a product admin', async () => {
-    const output = await request(app).post('/product').send({
+  it('should create a Client admin', async () => {
+    const output = await request(app).post('/client').send({
       id: '1',
-      name: 'Product 1',
-      description: 'Description 1',
-      purchasePrice: 100,
-      stock: 10,
+      name: 'John Doe',
+      email: 'johndoe@test.com',
+      document: '123456789',
+      street: 'Street',
+      number: '123',
+      complement: 'Complement',
+      city: 'City',
+      state: 'State',
+      zipCode: '12345678',
     });
     expect(output.status).toEqual(200);
-    expect(output.body.id).toEqual('1');
-    expect(output.body.name).toEqual('Product 1');
-    expect(output.body.description).toEqual('Description 1');
   });
 });

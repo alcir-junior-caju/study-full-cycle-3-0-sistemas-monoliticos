@@ -25,7 +25,6 @@ productRouter.post("/", async (req: Request, res: Response) => {
       description: outputProductCatalog.description,
       salesPrice: outputProductCatalog.salesPrice,
     };
-    console.log('OUTPUT', output);
     res.send(output);
   } catch (error) {
     res.status(500).send(error);
