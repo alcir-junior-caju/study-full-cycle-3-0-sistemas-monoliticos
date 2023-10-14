@@ -10,9 +10,10 @@ export class ProductAdminRepository implements ProductAdminGatewayInterface {
       name: product.name,
       description: product.description,
       purchasePrice: product.purchasePrice,
+      salesPrice: product.salesPrice,
       stock: product.stock,
-      createdAt: new Date(),
-      updatedAt: new Date(),
+      createdAt: product.createdAt ?? new Date(),
+      updatedAt: product.updatedAt ?? new Date(),
     });
   }
   async find(id: string): Promise<ProductAdminEntity> {

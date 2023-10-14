@@ -11,8 +11,8 @@ export class InvoiceItemModel extends Model {
   declare id: string;
 
   @ForeignKey(() => InvoiceModel)
-  @Column({ allowNull: false })
-  declare invoice_id: string;
+  @Column({ field: 'invoice_id', allowNull: false })
+  declare invoiceId: string;
 
   @BelongsTo(() => InvoiceModel)
   declare invoice: Awaited<InvoiceModel>;

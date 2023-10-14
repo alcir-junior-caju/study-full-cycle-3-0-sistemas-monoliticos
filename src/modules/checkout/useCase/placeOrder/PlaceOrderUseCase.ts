@@ -45,9 +45,11 @@ export class PlaceOrderUseCase implements UseCaseInterface {
       id: new Id(client.id),
       name: client.name,
       email: client.email,
+      document: client.document,
       address: `${client.street}, ${client.number}, ${client.complement}, ${client.city}, ${client.state}, ${client.zipCode}`,
     });
     const order = new OrderCheckout({
+      id: new Id(input.clientId),
       client: currentClient,
       products,
     });
@@ -109,6 +111,7 @@ export class PlaceOrderUseCase implements UseCaseInterface {
       description: product.description,
       salesPrice: product.salesPrice,
     };
-    return new ProductStoreCheckoutEntity(input);
+    const productEntity = new ProductStoreCheckoutEntity(input);
+    return productEntity;
   }
 }

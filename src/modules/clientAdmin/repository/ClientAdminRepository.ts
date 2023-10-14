@@ -23,7 +23,6 @@ export class ClientAdminRepository implements ClientAdminGatewayInterface {
 
   async find(id: string): Promise<ClientAdminEntity> {
     const client = await ClientAdminModel.findOne({ where: { id } });
-
     if (!client) {
       throw new Error('Client not found');
     }

@@ -13,6 +13,8 @@ export class ProductStoreCatalogRepository implements ProductStoreCatalogGateway
         name: product.name,
         description: product.description,
         salesPrice: product.salesPrice,
+        createdAt: product.createdAt ?? new Date(),
+        updatedAt: product.updatedAt ?? new Date(),
       })
     );
   }
@@ -24,6 +26,8 @@ export class ProductStoreCatalogRepository implements ProductStoreCatalogGateway
       name: product.name,
       description: product.description,
       salesPrice: product.salesPrice,
+      createdAt: product.createdAt,
+      updatedAt: product.updatedAt,
     });
   }
 }

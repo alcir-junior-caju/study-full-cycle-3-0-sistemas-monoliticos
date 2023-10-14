@@ -35,7 +35,7 @@ clientRouter.post("/", async (req: Request, res: Response) => {
       createdAt: outputClient.createdAt,
       updatedAt: outputClient.updatedAt,
     };
-    res.send(output);
+    res.status(200).send(output);
   } catch (error) {
     res.status(500).send(error);
   }

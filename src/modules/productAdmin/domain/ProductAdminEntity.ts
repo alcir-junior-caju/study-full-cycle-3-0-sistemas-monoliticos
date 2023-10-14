@@ -6,6 +6,8 @@ type Input = {
   description: string;
   purchasePrice: number;
   stock: number;
+  createdAt?: Date;
+  updatedAt?: Date;
 }
 
 export class ProductAdminEntity extends BaseEntity implements AggregateRootInterface {
@@ -14,8 +16,8 @@ export class ProductAdminEntity extends BaseEntity implements AggregateRootInter
   private _purchasePrice: number;
   private _stock: number;
 
-  constructor({ id, name, description, purchasePrice, stock}: Input) {
-    super(id);
+  constructor({ id, name, description, purchasePrice, stock, createdAt, updatedAt }: Input) {
+    super(id, createdAt, updatedAt);
     this._name = name;
     this._description = description;
     this._purchasePrice = purchasePrice;
@@ -32,6 +34,10 @@ export class ProductAdminEntity extends BaseEntity implements AggregateRootInter
 
   get purchasePrice(): number {
     return this._purchasePrice;
+  }
+
+  get salesPrice(): number {
+    return this._purchasePrice * 1.5;
   }
 
   get stock(): number {

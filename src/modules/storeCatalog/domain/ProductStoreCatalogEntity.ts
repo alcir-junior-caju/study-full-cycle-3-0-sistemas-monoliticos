@@ -5,6 +5,8 @@ type Input = {
   name: string;
   description: string;
   salesPrice: number;
+  createdAt?: Date;
+  updatedAt?: Date;
 };
 
 export class ProductStoreCatalogEntity extends BaseEntity implements AggregateRootInterface {
@@ -12,8 +14,8 @@ export class ProductStoreCatalogEntity extends BaseEntity implements AggregateRo
   private _description: string;
   private _salesPrice: number;
 
-  constructor({ id, name, description, salesPrice }: Input) {
-    super(id);
+  constructor({ id, name, description, salesPrice, createdAt, updatedAt }: Input) {
+    super(id, createdAt, updatedAt);
     this._name = name;
     this._description = description;
     this._salesPrice = salesPrice;

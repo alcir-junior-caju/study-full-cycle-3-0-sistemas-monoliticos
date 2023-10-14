@@ -4,18 +4,21 @@ type Input = {
   id?: Id;
   name: string;
   email: string;
+  document: string;
   address: string;
 }
 
 export class ClientCheckoutEntity extends BaseEntity implements AggregateRootInterface {
   private _name: string;
   private _email: string;
+  private _document: string;
   private _address: string;
 
-  constructor({ id, name, email, address }: Input) {
+  constructor({ id, name, email, document, address }: Input) {
     super(id);
     this._name = name;
     this._email = email;
+    this._document = document;
     this._address = address;
   }
 
@@ -25,6 +28,10 @@ export class ClientCheckoutEntity extends BaseEntity implements AggregateRootInt
 
   get email() {
     return this._email;
+  }
+
+  get document() {
+    return this._document;
   }
 
   get address() {

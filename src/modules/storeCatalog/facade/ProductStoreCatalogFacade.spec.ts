@@ -7,6 +7,8 @@ const product1 = {
   name: 'Product 1',
   description: 'Product 1 description',
   salesPrice: 10,
+  createdAt: new Date(),
+  updatedAt: new Date(),
 };
 
 const product2 = {
@@ -14,6 +16,8 @@ const product2 = {
   name: 'Product 2',
   description: 'Product 2 description',
   salesPrice: 20,
+  createdAt: new Date(),
+  updatedAt: new Date(),
 };
 
 describe('Integration test product catalog store facade', () => {

@@ -18,7 +18,7 @@ describe('Integration test Client api', () => {
     sequelize = new Sequelize({
       dialect: 'sqlite',
       storage: ':memory:',
-      logging: true,
+      logging: false,
       sync: { force: true },
     });
     sequelize.addModels([ClientAdminModel]);

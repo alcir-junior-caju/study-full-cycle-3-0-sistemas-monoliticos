@@ -33,12 +33,12 @@ export class ClientAdminModel extends Model {
   @Column({ allowNull: false })
   declare state: string;
 
-  @Column({ allowNull: false })
+  @Column({ field: 'zip_code', allowNull: false })
   declare zipCode: string;
 
-  @Column({ allowNull: false })
+  @Column({ field: 'created_at', allowNull: false })
   declare createdAt: Date;
 
-  @Column({ allowNull: false })
+  @Column({ field: 'updated_at', allowNull: false })
   declare updatedAt: Date;
 }

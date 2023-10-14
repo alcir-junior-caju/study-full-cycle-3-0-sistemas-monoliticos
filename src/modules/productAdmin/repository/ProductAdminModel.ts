@@ -1,7 +1,7 @@
 import { Column, Model, PrimaryKey, Table } from "sequelize-typescript";
 
 @Table({
-  modelName: 'Product-admin-model',
+  modelName: 'product-admin-model',
   tableName: 'products',
   timestamps: false,
 })
@@ -16,15 +16,18 @@ export class ProductAdminModel extends Model {
   @Column({ allowNull: false })
   declare description: string;
 
-  @Column({ allowNull: false })
+  @Column({ field: 'sales_price', allowNull: true })
+  declare salesPrice: number;
+
+  @Column({ field: 'purchase_price', allowNull: false })
   declare purchasePrice: number;
 
   @Column({ allowNull: false })
   declare stock: number;
 
-  @Column({ allowNull: false })
+  @Column({ field: 'created_at', allowNull: false })
   declare createdAt: Date;
 
-  @Column({ allowNull: false })
+  @Column({ field: 'updated_at', allowNull: false })
   declare updatedAt: Date;
 }

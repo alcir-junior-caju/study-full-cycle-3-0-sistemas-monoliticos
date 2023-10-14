@@ -19,7 +19,7 @@ describe('Integration test product api', () => {
     sequelize = new Sequelize({
       dialect: 'sqlite',
       storage: ':memory:',
-      logging: true,
+      logging: false,
       sync: { force: true },
     });
     sequelize.addModels([ProductAdminModel, ProductStoreCatalogModel]);
