@@ -26,8 +26,8 @@ export class OrderModel extends Model {
   @BelongsTo(() => ClientModel)
   declare client: Awaited<ClientModel>
 
-  @HasMany(() => ProductModel, { onUpdate: 'CASCADE', onDelete: 'CASCADE' })
-  declare items: ProductModel[]
+  @HasMany(() => ProductModel)
+  declare items: Awaited<ProductModel[]>
 
   @Column({ allowNull: false })
   declare status: string

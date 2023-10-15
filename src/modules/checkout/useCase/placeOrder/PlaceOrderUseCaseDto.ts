@@ -1,4 +1,5 @@
 export interface InputPlaceOrderUseCaseDto {
+  id: string;
   clientId: string;
   products: {
     productId: string;

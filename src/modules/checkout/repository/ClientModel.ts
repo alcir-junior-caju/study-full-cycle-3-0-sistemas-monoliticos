@@ -18,7 +18,7 @@ export class ClientModel extends Model {
   declare id: string
 
   @HasMany(() => OrderModel)
-  declare orders: OrderModel[]
+  declare orders: Awaited<OrderModel[]>
 
   @Column({ allowNull: false })
   declare name: string
@@ -31,10 +31,4 @@ export class ClientModel extends Model {
 
   @Column({ allowNull: false })
   declare address: string
-
-  @Column({ field: 'created_at', allowNull: true })
-  declare createdAt: Date
-
-  @Column({ field: 'update_at', allowNull: true })
-  declare updatedAt: Date
 }

@@ -17,6 +17,7 @@ export class CheckoutFacade implements CheckoutFacadeInterface {
     input: InputPlaceOrderCheckoutFacadeDto
   ): Promise<OutputPlaceOrderCheckoutFacadeDto> {
     const inputFacade = {
+      id: input.id,
       clientId: input.clientId,
       products: input.products.map((product) => ({
         productId: product.productId

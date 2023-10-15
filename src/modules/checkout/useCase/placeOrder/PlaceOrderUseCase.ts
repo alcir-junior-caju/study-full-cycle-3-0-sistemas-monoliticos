@@ -39,7 +39,7 @@ export class PlaceOrderUseCase implements UseCaseInterface {
     }
     await this.validateProducts(input);
     const products = await Promise.all(
-      input.products.map((product) => this.getProduct(product.productId)),
+      input.products.map((product) => this.getProduct(product.productId, input.id)),
     );
     const currentClient = new ClientCheckoutEntity({
       id: new Id(client.id),
@@ -49,7 +49,7 @@ export class PlaceOrderUseCase implements UseCaseInterface {
       address: `${client.street}, ${client.number}, ${client.complement}, ${client.city}, ${client.state}, ${client.zipCode}`,
     });
     const order = new OrderCheckout({
-      id: new Id(input.clientId),
+      id: new Id(input.id),
       client: currentClient,
       products,
     });
@@ -100,13 +100,14 @@ export class PlaceOrderUseCase implements UseCaseInterface {
     }
   }
 
-  private async getProduct(productId: string): Promise<ProductStoreCheckoutEntity> {
+  private async getProduct(productId: string, orderId: string): Promise<ProductStoreCheckoutEntity> {
     const product = await this._catalogFacade.find({ id: productId });
     if (!product) {
       throw new Error(`Product not found`);
     }
     const input = {
       id: new Id(product.id),
+      orderId: new Id(orderId),
       name: product.name,
       description: product.description,
       salesPrice: product.salesPrice,

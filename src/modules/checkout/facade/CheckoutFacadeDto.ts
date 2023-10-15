@@ -1,4 +1,5 @@
 export interface InputPlaceOrderCheckoutFacadeDto {
+  id: string
   clientId: string
   products: {
     productId: string

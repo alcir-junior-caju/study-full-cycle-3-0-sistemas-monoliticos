@@ -7,6 +7,7 @@ import { ProductModel } from "./ProductModel"
 
 export class CheckoutRepository implements CheckoutGatewayInterface {
   async addOrder(order: OrderCheckout): Promise<void> {
+    console.log('order', order)
     const input = {
       id: order.id.id,
       clientId: order.client.id.id,
@@ -26,9 +27,6 @@ export class CheckoutRepository implements CheckoutGatewayInterface {
           {
             model: ProductModel
           },
-          {
-            model: ClientModel
-          }
         ]
       }
     )
@@ -56,6 +54,7 @@ export class CheckoutRepository implements CheckoutGatewayInterface {
       products: order.items.map(item => {
         return new ProductStoreCheckoutEntity({
           id: new Id(item.id),
+          orderId: new Id(item.orderId),
           name: item.name,
           description: item.description,
           salesPrice: item.salesPrice

@@ -73,8 +73,6 @@ describe('Checkout Repository unit test', () => {
       email: client.email,
       document: client.document,
       address: client.address,
-      createdAt: new Date(),
-      updatedAt: new Date()
     });
 
     await checkoutRepository.addOrder(order);

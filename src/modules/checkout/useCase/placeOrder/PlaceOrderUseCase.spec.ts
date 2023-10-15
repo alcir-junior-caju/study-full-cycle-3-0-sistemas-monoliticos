@@ -21,6 +21,7 @@ describe('Unit test Checkout use case', () => {
       // @ts-expect-error - force set client facade
       placeOrderUseCase['_clientFacade'] = mockClientFacade;
       const input: InputPlaceOrderUseCaseDto = {
+        id: '0',
         clientId: '0',
         products: [],
       };
@@ -43,6 +44,7 @@ describe('Unit test Checkout use case', () => {
       // @ts-expect-error - force set client facade
       placeOrderUseCase['_clientFacade'] = mockClientFacade;
       const input: InputPlaceOrderUseCaseDto = {
+        id: '0',
         clientId: '123',
         products: [],
       };
@@ -82,12 +84,14 @@ describe('Unit test Checkout use case', () => {
       const products = {
         '1': new ProductStoreCheckoutEntity({
           id: new Id('1'),
+          orderId: new Id('1'),
           name: 'Product 1',
           description: 'Product 1 description',
           salesPrice: 40,
         }),
         '2': new ProductStoreCheckoutEntity({
           id: new Id('2'),
+          orderId: new Id('1'),
           name: 'Product 2',
           description: 'Product 2 description',
           salesPrice: 30,
@@ -116,6 +120,7 @@ describe('Unit test Checkout use case', () => {
           updatedAt: new Date(),
         });
         const input: InputPlaceOrderUseCaseDto = {
+          id: '1o',
           clientId: '1c',
           products: [{ productId: '1' }, { productId: '2' }],
         };
@@ -150,6 +155,7 @@ describe('Unit test Checkout use case', () => {
           updatedAt: new Date(),
         });
         const input: InputPlaceOrderUseCaseDto = {
+          id: '1o',
           clientId: '1c',
           products: [{ productId: '1' }, { productId: '2' }],
         };
@@ -203,6 +209,7 @@ describe('Unit test Checkout use case', () => {
 
     it('should throw error if no products are selected', async () => {
       const input: InputPlaceOrderUseCaseDto = {
+        id: '0',
         clientId: '0',
         products: [],
       };
@@ -221,6 +228,7 @@ describe('Unit test Checkout use case', () => {
       // @ts-expect-error - force set product facade
       placeOrderUseCase['_productFacade'] = mockProductFacade;
       let input: InputPlaceOrderUseCaseDto = {
+        id: '0',
         clientId: '0',
         products: [{ productId: '1' }],
       };
@@ -228,6 +236,7 @@ describe('Unit test Checkout use case', () => {
         placeOrderUseCase['validateProducts'](input)
       ).rejects.toThrow(new Error('Product 1 is not available in stock'));
       input = {
+        id: '0',
         clientId: '0',
         products: [{ productId: '0' }, { productId: '1' }],
       };
@@ -236,6 +245,7 @@ describe('Unit test Checkout use case', () => {
       ).rejects.toThrow(new Error('Product 1 is not available in stock'));
       expect(mockProductFacade.checkStock).toHaveBeenCalledTimes(3);
       input = {
+        id: '0',
         clientId: '0',
         products: [{ productId: '0' }, { productId: '1' }, { productId: '2' }],
       };
@@ -262,7 +272,7 @@ describe('Unit test Checkout use case', () => {
       // @ts-expect-error - force set catalog facade
       placeOrderUseCase['_catalogFacade'] = mockCatalogFacade;
       await expect(
-        placeOrderUseCase['getProduct']('0')
+        placeOrderUseCase['getProduct']('0', '1')
       ).rejects.toThrowError(new Error('Product not found'));
     });
 
@@ -278,9 +288,10 @@ describe('Unit test Checkout use case', () => {
       };
       // @ts-expect-error - force set catalog facade
       placeOrderUseCase['_catalogFacade'] = mockCatalogFacade;
-      await expect(placeOrderUseCase['getProduct'](input.id)).resolves.toEqual(
+      await expect(placeOrderUseCase['getProduct'](input.id, '1')).resolves.toEqual(
         new ProductStoreCheckoutEntity({
           id: new Id(input.id),
+          orderId: new Id('1'),
           name: input.name,
           description: input.description,
           salesPrice: input.salesPrice,

@@ -2,6 +2,7 @@ import { AggregateRootInterface, BaseEntity, Id } from "../../@shared";
 
 type Input = {
   id?: Id;
+  orderId: Id;
   name: string;
   description: string;
   salesPrice: number;
@@ -11,12 +12,18 @@ export class ProductStoreCheckoutEntity extends BaseEntity implements AggregateR
   private _name: string;
   private _description: string;
   private _salesPrice: number;
+  private _orderId: Id;
 
-  constructor({ id, name, description, salesPrice }: Input) {
+  constructor({ id, orderId, name, description, salesPrice }: Input) {
     super(id);
+    this._orderId = orderId;
     this._name = name;
     this._description = description;
     this._salesPrice = salesPrice;
+  }
+
+  get orderId(): Id {
+    return this._orderId;
   }
 
   get name(): string {
